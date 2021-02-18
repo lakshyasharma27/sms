@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href={% static 'css/bootstrap.min.css' %}>
+    <link rel="stylesheet" href={% static 'css/fontawesome.min.css' %}>
+
+    {% block corecss %}
+    <link rel="stylesheet" href={% static 'css/core.css' %}>
+    {% endblock corecss %}
+    <title>{% block title %}Default Title{% endblock title %}</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        {% block content %}
+        <h3 class="display-1">Hello</h3>
+        <h3>Hello</h3>
+        {% endblock content %}
+        {% block footbar %}{% endblock footbar %}
+    </div>
+    <script src={% static 'js/bootstrap.min.js' %}></script>
+    <script src={% static 'js/jquery.js' %}></script>
+    <script src={% static 'js/popper.js' %}></script>
+    <script src={% static 'js/fontawesome.min.js' %}></script>
+</body>
+
+</html>

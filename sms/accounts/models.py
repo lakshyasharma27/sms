@@ -46,6 +46,12 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    STUDENT = "STUDENT"
+    TEACHER = "TEACHER"
+    TYPE_OF_USER = [
+        (STUDENT, 'Student'),
+        (TEACHER, 'Teacher'),
+    ]
     email = models.EmailField(_("Email Address"), unique=True)
     user_name = models.CharField(max_length=20, unique=True)
     first_name = models.CharField(max_length=20)
@@ -53,7 +59,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     timestamp = models.DateTimeField(default=timezone.now)
     is_staff = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
-
+    type_of_user = models.CharField(
+        max_length=10, choices=TYPE_OF_USER, default=STUDENT)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['user_name', 'first_name']
     objects = UserManager()
@@ -76,3 +83,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
+
+    def is_student(self):
+        return self.type_of_user == User.STUDENT
+
+    def is_teacher(self):
+        return self.type_of_user == User.TEACHER

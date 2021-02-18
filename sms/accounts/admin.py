@@ -8,16 +8,16 @@ from django.contrib.auth.admin import UserAdmin
 class UserAdminConfig(UserAdmin):
     ordering = ("-timestamp",)
     list_display = ("email", "user_name", "first_name",
-                    "last_name", "is_active", "is_staff")
+                    "last_name", "type_of_user", "is_active", "is_staff")
 
     fieldsets = (
-        (None, {'fields': ('email', 'user_name', 'first_name')}),
+        (None, {'fields': ('email', 'user_name', 'first_name', 'type_of_user')}),
         ('Permission', {'fields': ('is_staff', 'is_active')}),
         ('Personal', {'fields': ('last_name',)})
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'user_name', 'first_name', 'password1', 'password2', 'is_active', 'is_staff')
+            'fields': ('email', 'user_name', 'first_name', 'password1', 'password2', 'type_of_user', 'is_active', 'is_staff')
         }),
     )
